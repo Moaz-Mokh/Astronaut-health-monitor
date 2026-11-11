@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -288,15 +289,29 @@ int main()
 
     cout<<" Your risk score is "<<riskp<<"/24";
     riskper=(riskp/24.0)*100;
-    cout<<" Your risk percetnage is " <<riskper;
+    cout<<" Your risk percentage is " <<riskper;
 
 
+    ofstream file("astronaut-data.csv",ios::app);
 
+    file<<date<<","
+    <<systBP<<","
+    <<diaBP<<","
+    <<hr<<","
+    <<rr<<","
+    <<bs<<","
+    <<spO2<<","
+    <<t<<","
+    <<sleep<<","
+    <<riskper<<","
+    <<riskp
+    <<endl;
 
+    file.close();
+    cout<<"\n Data is stored in the data base"<<endl;
 
-    return 0;
+return 0;
 }
-
 
 
 
