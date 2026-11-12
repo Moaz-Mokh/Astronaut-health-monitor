@@ -383,8 +383,33 @@ cout
 <<"\nDays since mission = "<<Tdays
 <<endl;
 
+//Calculating the difference between the new data and averages
+
+double diffhr=hr-avghr, diffrr=rr-avgrr, diffbs=bs-avgbs ,diffspO2=spO2-avgspO2,diffsleep=sleep-avgsleep,diffriskper=riskper-avgriskper,diffriskp=totalriskp-avgriskp;
+
+cout
+<<"\n Difference between new Hear rate and avg = "<<diffhr
+<<"\n Difference between new Respiratory rate and avg = "<<diffrr
+<<"\n Difference between new Blood sugar and avg = "<<diffbs
+<<"\n Difference between new Blood oxygen and avg = "<<diffspO2
+<<"\n Difference between new Sleep and avg = "<<diffsleep
+<<"\n Difference between new Riskpercentage and avg = "<<diffriskper
+<<"\n Difference between new Riskpoints and avg = "<<diffriskp
+<<endl;
 
 
+double pctdiffhr= ((diffhr)/(avghr))*100,pctdiffrr=((diffrr)/(avgrr))*100,pctdiffbs=((diffbs)/(avgbs))*100,pctdiffspO2=((diffspO2)/(avgspO2))*100,pctdiffsleep=((diffsleep)/(avgsleep))*100;
+double pctdiffriskper=((diffriskper)/(avgriskper))*100,pctdiffriskp=((diffriskp)/(avgriskp)) *100;
+
+cout
+<<"\n Percentage of the difference of Heart Rate = "<<pctdiffhr
+<<"\n Perecentage of the difference of Respiratory Rate = "<<pctdiffrr
+<<"\n Percentage of the difference of Blood sugar = "<<pctdiffbs
+<<"\n Perecentage of the difference of Blood oxygen = "<<pctdiffspO2
+<<"\n Percentage of the difference of sleep = "<<pctdiffsleep
+<<"\n Percentage of the diffrence of risk percentage = "<<pctdiffriskper<<"%"
+<<"\n Percentage of the difference of risk points = "<<pctdiffriskp
+<<endl;
 
 return 0;
 }
