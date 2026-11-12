@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -9,8 +10,9 @@ int main()
     // initialize the variables
 
     int systBP, diaBP, hr, rr, bs, spO2 ;
-    double t , sleep , riskper;
+    double t , sleep , riskper , totalhr , totalrr , totalbs , totalspO2 , totalt , totalsleep, totalriskper , totalriskp ;
     double riskp=0.0;
+    int Tdays=0;
     string date;
 
     cout << "Welcome Astronaut! Enter the date: ";
@@ -224,7 +226,7 @@ int main()
     }
     else if ((t<=38.5 && t>=37.9) || (t<=35.4 && t>=35))
     {
-        riskp=1;
+        riskp+=1;
 
     }
     else
@@ -292,9 +294,9 @@ int main()
     cout<<" Your risk percentage is " <<riskper;
 
 
-    ofstream file("astronaut-data.csv",ios::app);
+    ofstream storefile("astronaut-data.csv",ios::app);   // storing the data in the CSV file 
 
-    file<<date<<","
+    storefile<<date<<","
     <<systBP<<","
     <<diaBP<<","
     <<hr<<","
@@ -307,8 +309,82 @@ int main()
     <<riskp
     <<endl;
 
-    file.close();
+    storefile.close();
     cout<<"\n Data is stored in the data base"<<endl;
+
+
+   ifstream readFile("astronaut-data.csv"); // reading the stored data in the CSV file
+
+string line;
+
+getline(readFile, line);
+
+while(getline(readFile, line))
+{
+    cout << line << endl;
+
+    stringstream ss(line);     //splits the stored data
+
+    string value;
+    int column=0;
+
+    cout << "\nSPLIT VALUES:\n";
+
+    while(getline(ss, value, ','))   // Takes the needed data and find the total then adds the days and finds the average
+    {
+        if(column==3)
+        {
+            totalhr+=stod(value);
+        }
+        if(column==4)
+        {
+            totalrr+=stod(value);
+        }
+        if(column==5)
+        {
+            totalbs+=stod(value);
+        }
+        if(column==6)
+        {
+            totalspO2+=stod(value);
+        }
+        if(column==7)
+        {
+            totalt+=stod(value);
+        }
+        if(column==8)
+        {
+            totalsleep+=stod(value);
+        }
+        if(column==9)
+        {
+            totalriskper+=stod(value);
+        }
+        if(column==10)
+        {
+            totalriskp+=stod(value);
+        }
+        
+        column++;
+        cout << "[" << value << "]" << endl;
+    }
+    Tdays+=1;
+}
+readFile.close();
+double avghr=totalhr/Tdays , avgrr=totalrr/Tdays , avgbs=totalbs/Tdays , avgspO2=totalspO2/Tdays, avgt=totalt/Tdays , avgsleep=totalsleep/Tdays ,avgriskper=totalriskper/Tdays , avgriskp=totalriskp/Tdays ;
+cout  
+<<"\nAverage hear rate = " <<avghr
+<<"\nAverage respiratory rate =" <<avgrr
+<<"\nAverage blood sugare =" <<avgbs
+<<"\nAverage oxygen in the blood "<<avgspO2
+<<"\nAverage temperature ="<<avgt
+<<"\nAverage sleep =" <<avgsleep
+<<"\nAverage risk points =" <<avgriskp
+<<"\nDays since mission = "<<Tdays
+<<endl;
+
+
+
 
 return 0;
 }
