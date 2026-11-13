@@ -289,8 +289,8 @@ int main()
         riskp+=3;
     }
 
-    cout<<" Your risk score is "<<riskp<<"/24";
-    riskper=(riskp/24.0)*100;
+    cout<<" Your risk score is "<<riskp<<"/21";
+    riskper=(riskp/21.0)*100;
     cout<<" Your risk percentage is " <<riskper;
 
 
